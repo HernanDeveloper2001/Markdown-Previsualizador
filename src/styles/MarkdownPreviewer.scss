@@ -1,20 +1,20 @@
-.editorWrap {
+.previewWrap {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
 
-.toolbar {
+.toolbarPreview {
   background-color: rgba(255, 166, 0, 0.5);
   box-shadow: 1px 1px 10px 2px rgba(255, 166, 0, 0.5);
   resize: none;
   font-size: 1rem;
   font-family: 'Russo One', sans-serif;
   border: 1px solid rgba(255, 166, 0, 0.5);
-  width: 40%;
+  width: 60%;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -22,12 +22,12 @@
   color: rgba(49, 42, 29, 0.8);
 }
 
-#editor {
+#preview {
   background-color: rgba(166, 108, 0, 0.5);
   box-shadow: 1px 1px 10px 2px rgba(166, 108, 0, 0.5);
   border: 1px solid rgba(166, 108, 0, 0.5);
-  width: 40%;
-  height: 300px;
+  width: 60%;
+  height: auto;
   padding: 1rem;
   resize: none;
   outline: none;

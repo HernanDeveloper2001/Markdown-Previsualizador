@@ -1,13 +1,19 @@
-import { marked } from "marked";
+import { FaFreeCodeCamp, FaExpandArrowsAlt } from "react-icons/fa"
+import "../styles/MarkdownPreviewer.scss"
 
 
-function MarkdownPreviewer({handleMarkdownChange, markdown}) {
+function MarkdownPreviewer() {
  
   return (
-    <div>
+    <div className="previewWrap">
+      <div className="toolbarPreview">
+        <i className="icon-freecodecamp"><FaFreeCodeCamp /></i>
+          Preview
+        <i className="icon-arrows"><FaExpandArrowsAlt /></i>
+      </div>
       <div
-        className="markdown-preview"
-        dangerouslySetInnerHTML={{ __html: marked(markdown) }}
+        id="preview"
+        
       />
     </div>
   );

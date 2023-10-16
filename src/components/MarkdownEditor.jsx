@@ -1,49 +1,26 @@
 import MarkdownPreviewer from "./MarkdownPreviewer"
-import { useState } from "react";
+import "../styles/MarkdownEditor.scss"
+import { FaFreeCodeCamp, FaExpandArrowsAlt } from "react-icons/fa"
+
 const MarkdownEditor = () => {
 
-  const initialMarkdown = `# Welcome to my React Markdown Previewer!
-
-  ## This is a sub-heading...
-  ### And here's some other cool stuff:
-  
-  Heres some code, \`<div></div>\`, between 2 backticks.
-  
-  \`\`\`
-  // this is multi-line code:
-  
-  function anotherExample(firstLine, lastLine) {
-    if (firstLine == '\\\`\\\`\\\`' && lastLine == '\\\`\\\`\\\`') {
-      return multiLineCode;
-    }
-  }
-  \`\`\`
-  
-  You can also make text **bold**... whoa!
-  Or _italic_.
-  Or... wait for it... **_both!_**
-  And feel free to go crazy ~~crossing stuff out~~.
-  
-    There's also [links](https://www...`;
-  
-    const [markdown, setMarkdown] = useState(initialMarkdown);
-  
-    const handleMarkdownChange = (event) => {
-      setMarkdown(event.target.value);
-    };
   return (
     <>
-    <div className='editorWrap'>
-      <textarea
-        value={markdown}
-        onChange={handleMarkdownChange}
-        rows={10}
-        cols={30}
-      />
-    </div>
-    <MarkdownPreviewer 
-      markdown={markdown}
-      handleMarkdownChange={handleMarkdownChange} />
+      <div className='editorWrap'>
+        <div className="toolbar">
+          <i className="icon-freecodecamp">
+            <FaFreeCodeCamp />
+          </i>
+            Editor
+          <i className="icon-arrows">
+            <FaExpandArrowsAlt />
+          </i>
+        </div>
+        <textarea
+          id="editor"
+        />
+      </div>
+      <MarkdownPreviewer />
     </>
   )
 }
