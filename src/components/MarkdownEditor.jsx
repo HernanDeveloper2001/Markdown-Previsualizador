@@ -1,51 +1,68 @@
-import MarkdownPreviewer from "./MarkdownPreviewer"
+import MarkdownPreviewer from "./MarkdownPreviewer";
+import "../styles/MarkdownEditor.scss";
+import { FaFreeCodeCamp, FaExpandArrowsAlt,FaCompressAlt } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { updateData } from "../features/data-markdown/dataMarkdown";
 import { useState } from "react";
+
 const MarkdownEditor = () => {
 
-  const initialMarkdown = `# Welcome to my React Markdown Previewer!
 
-  ## This is a sub-heading...
-  ### And here's some other cool stuff:
-  
-  Heres some code, \`<div></div>\`, between 2 backticks.
-  
-  \`\`\`
-  // this is multi-line code:
-  
-  function anotherExample(firstLine, lastLine) {
-    if (firstLine == '\\\`\\\`\\\`' && lastLine == '\\\`\\\`\\\`') {
-      return multiLineCode;
-    }
+  const dataMarkdown = useSelector(state => state.dataMarkdown);
+  const dataDispatch = useDispatch()
+
+  const [activeMarkdown1, setActiveMarkdown1] = useState(false);
+  const [activeMarkdown2, setActiveMarkdown2] = useState(false);
+
+  function onActiveMarkdown(id){
+   if(id === "1" ){
+    setActiveMarkdown1(!activeMarkdown1);
+    console.log(id)
+   }else if(id === "2"){
+    setActiveMarkdown2(!activeMarkdown2)
+    console.log(id)
+   }
   }
-  \`\`\`
-  
-  You can also make text **bold**... whoa!
-  Or _italic_.
-  Or... wait for it... **_both!_**
-  And feel free to go crazy ~~crossing stuff out~~.
-  
-    There's also [links](https://www...`;
-  
-    const [markdown, setMarkdown] = useState(initialMarkdown);
-  
-    const handleMarkdownChange = (event) => {
-      setMarkdown(event.target.value);
-    };
+
+  function handleDataMarkdown({target}) {
+    const { value } = target;
+    dataDispatch(updateData(value))
+  }
+
   return (
     <>
-    <div className='editorWrap'>
-      <textarea
-        value={markdown}
-        onChange={handleMarkdownChange}
-        rows={10}
-        cols={30}
-      />
-    </div>
-    <MarkdownPreviewer 
-      markdown={markdown}
-      handleMarkdownChange={handleMarkdownChange} />
+      <div className="editorWrap" id={activeMarkdown2 ? "hidden" : null}>
+        <div className="contenedorEditor" >
+          <div className="toolbar">
+            <i className="icon-freecodecamp">
+              <FaFreeCodeCamp />
+            </i>
+              Editor
+            <i 
+              className="icon-arrows" 
+              onClick={() => onActiveMarkdown("1")}>
+              {
+                activeMarkdown1 
+                ? <FaCompressAlt />
+                : <FaExpandArrowsAlt />
+              }
+            </i>
+          </div>
+          <textarea
+            id={activeMarkdown1?"maximized": "editor"}
+            value={dataMarkdown}
+            onChange={handleDataMarkdown}
+          />
+        </div>
+      </div>
+      <MarkdownPreviewer 
+        dataMarkdown={dataMarkdown}
+        activeMarkdown2={activeMarkdown2}
+        onActiveMarkdown={onActiveMarkdown} 
+        activeMarkdown1={activeMarkdown1} />
     </>
   )
 }
+
 
 export default MarkdownEditor
